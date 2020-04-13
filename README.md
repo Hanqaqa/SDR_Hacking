@@ -32,7 +32,7 @@ The possibilities are endless!, even though each application uses a different pr
 
 - **[GNU Radio](https://www.gnuradio.org/)**: The father of all the SDR applications. It is an Open Source development toolkit that provides signal processing blocks to implement software-defined radios and signal-processing systems. Requires a very good knowledge of all the modulation and demodulation techniques as well as general knowledge of flowgraph programming. There is a big number of premade modules. Available for all platforms.
 
-![GNURADIO](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/GNURADIO.PNG)
+![GNURADIO](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/GNURADIO.png)
 
 ## **SDR in the law**
 
@@ -54,19 +54,19 @@ The three main modulation methods used today are:
 
 ### Analog Modulation
 
-#### Amplitude Modulation
+##### Amplitude Modulation
 
-#### Frequency Modulation
+##### Frequency Modulation
 
 ### Digital Modulation
 
-#### Amplitude Shift Keying
+##### Amplitude Shift Keying
 
-#### Frequency Shift Keying
+##### Frequency Shift Keying
 
 ### Spread Spectrum Modulation
 
-#### Frequency Hopping Spread Spectrum
+##### Frequency Hopping Spread Spectrum
 
 ## SDR#
 
@@ -90,7 +90,7 @@ We can see any analog TV signals, although, in my country, Analog TV was switche
 ![SDRPAL](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/SDRPAL.PNG)
 
 
-
+## Universal Radio Hacker
 
 
 
