@@ -1,0 +1,102 @@
+
+FMPA
+----
+
+  FMPA is a simple tuner / NFM demodulator for use with DSD+ and Airspy devices.
+  It samples at 2.5 MHz and displays 1.875 MHz of spectrum.
+
+  FMPA operates very much like FMP.  Most of FMPA's command line options and active keys
+  are identical to FMP.  These are detailed in the FMP.txt file.
+
+  Options and features exclusive to FMPA are covered in this document.
+
+
+  FMPA vs FMP differences:
+
+    Three command line options and active keys to set gain levels.
+
+    No PPM adjustment.
+
+    Scanlist file name is "FMPA.ScanList"
+
+    Airspy device numbers are based on Airspy serial numbers;
+    lowest serial number = device #1, next highest serial number = #2, etc.
+
+
+  Command line parameters and active keys summary:
+
+      Usage:
+        FMPA [options]   Normal operation
+        FMPA -h          Show help
+
+      Options:
+        -i<num>     Airspy device number (1-255) [-i1]
+        -o<num>     Output audio device (1-255) [-o1]
+        -o<port>    Output audio TCP port (256-65535)
+        -L<num>     LNA gain (0-15) [-L15]
+        -M<num>     Mixer gain (0-15) [-M10]
+        -V<num>     VGA gain (0-15) [-V5]
+        -f<MHz>     Initial tuned frequency [-f99.9]
+        -b<kHz>     Initial filter bandwidth (4, 7, 9.5, 12.5) [-b7]
+        -z<num>     Show zoomed spectrum (0-1) [-z1]
+        -e<num>     Enable/disable economy mode (0-1) [-e1]
+        -n<num>     Select noise filter (0-2) [-n0]
+        -v<num>     Set volume level (0-500) [-v100]
+        -s<num>     Enable/disable scanner mode (0-1) [-s0]
+        -wsl<v>.<h> Spectrum window location [-wsl50.50]
+        -_<num>     Minimize windows at startup; bitmapped
+        -rv         Role is trunk voice channel monitor
+
+      Active keys:
+       0-9 . Enter  set frequency
+               [/]  select step size
+               /  step frequency
+          Ctrl /  step frequency by 250 Hz
+
+                 M  toggle spectrum memory overlay
+                 X  reset spectrum memory
+                 Z  toggle spectrum zoom overlay
+                 I  select injection mode
+                 B  select bandpass filter
+                 E  toggle economy mode
+                 F  select noise filter
+               /  adjust volume level
+          spacebar  toggle muting
+
+               j/J  adjust LNA gain
+               k/K  adjust mixer gain
+               l/L  adjust VGA gain
+
+                 R  toggle raw I/Q and FM demod recording
+
+                 S  start scanner mode or exit hold mode
+                 V  start trunk voice following mode
+
+                 ?  list active keys
+               Esc  exit scanner mode or exit program
+
+       Left click on spectrum: retune
+
+
+  FMPA.cfg
+
+    The first four lines in FMPA.cfg should not be changed at this time.
+    The remaining lines can be edited as required.
+    See FMP.txt for configuration file details.
+
+
+  FMPA dependencies:
+
+      FMPA.exe
+
+        airspy.dll
+
+          pthreadVCE2.dll
+
+            msvcr100.dll
+
+          libusb-1.0.dll
+
+            msvcrt.dll
+
+--

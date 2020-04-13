@@ -1,0 +1,7 @@
+
+; DSD+ group records
+;
+; you can edit this file while DSD+ is running
+;
+; line format: protocol, networkID, group, priority, override, hits, timestamp, "group alias"
+

@@ -1,0 +1,630 @@
+
+
+DSD+ 1.101 User Guide
+---------------------
+
+
+Installation
+------------
+
+BACK UP YOUR FILES
+
+Before installing this version of DSD+, make backup copies of all of your current DSD+ files,
+especially the data files:
+
+  DSDPlus.networks
+  DSDPlus.sites
+  DSDPlus.groups
+  DSDPlus.radios
+  DSDPlus.frequencies
+
+Also back up any files you have created or modified, such as configuration (.cfg) and batch files.
+
+
+If this is a new installation or if you are installing to a new folder (e.g. you use separate
+folders for each version of DSD+ that you install), just extract all of the zipfile contents
+to your installation folder.  Then copy over any data/configuration/batch files that you have
+modified from your old DSD+ folder to the new one.
+
+
+If you are updating an existing DSD+ installation, just extract the .exe files (the programs)
+and the .txt files (the documentation / help files); also extract all of the FMPA-related files.
+Doing this will leave your existing data/batch/configuration files intact.
+
+
+
+DLL files
+---------
+
+All of the DLL files used by DSD+, FMP and FMPA can be downloaded from dsdplus.com;
+copy all DLL files to your DSD+ folder.
+
+
+
+Usage/Options Summary
+---------------------
+
+Usage:
+  DSDPlus [options]            Decode from audio stream
+  DSDPlus [options] ? file     Decode from .wav file
+  DSDPlus -h                   Show help
+
+Options ( [...] = default value):
+
+Display/Logging options:
+  >file       Create log file
+  >>file      Append to log file
+  -_<num>     Minimize selected windows at startup (bitmapped, 0-15) [-_0]
+  --          Show command line options in console window title
+  -t          Time stamp console log file entries
+  -T          Time stamp console log file entries and console screen data
+  -E          Add NAC/RAN/DCC/RAS data to event log file entries
+  -H<num>     High contrast mode (bitmapped, 0-63) [-H0]
+  -v<num>     Frame information verbosity (0-4) [-v2]
+
+  -wsl<v>.<h> Source audio waveform window location [-wsl10.10]
+  -wss<h>.<w> Source audio waveform window size (0.0 blocks) [-wss200.300]
+  -wsp<num>   Source audio waveform window update period (10-1000) [-wsp100]
+
+  -wel<v>.<h> Event log window location [-wel50.50]
+  -wes<h>.<w> Event log window size (min ?) [-wes400.500]
+  -weh<num>   Event log window font height [-weh15]
+
+  -wcl<v>.<h> Channel window location [-wcl90.90]
+  -wch<num>   Channel window font height [-wch15]
+
+Input/Output options:
+  -i<spec>    Input audio device (1-255) and channel (M/L/R) [-i1M]
+  -i<[addr:]port> FMP TCP link IPv4 address and port number
+
+  -g<num>     Output audio gain (0.001-999; 0=auto) [-g0]
+
+  -o<spec>    Output audio device (1-255; 0=none) and channel (M/L/R) [-o1]
+                in/out channels are optional; default=in:mono, out:mode based
+
+  -Och <file> Output audio file channel count and name/type [-O DSDPlus.wav]
+                ch: M=mono,S=stereo,blank=auto; file: .wav or .mp3 (NUL=none)
+
+  -I<num>     Create new wav/mp3 file every <num> minutes (1440=daily) [-I0]
+
+  -P<wav|mp3> Also create per-call wav or mp3 files
+
+  -M<num>     MP3 ABR kbps per channel (8-32) [-M15]
+
+Decoder options:
+  -rc         role is control/rest channel decoder
+  -rv         role is voice channel decoder
+
+  -p          Invert signal polarity (may be required for X2-TDMA and dPMR)
+  -mp         optimize for PSK modulation (will not decode non-PSK)
+
+  -fa         Auto-detect all protocols / frame types except dPMR [-fa]
+  -fd         Decode D-STAR (no audio)
+  -fn         Decode NXDN4800 (Kenwood NEXEDGE and Icom IDAS)
+  -fN         Decode NXDN9600 (Kenwood NEXEDGE)
+  -fr         Decode DMR/MotoTRBO (TDMA inputs + both output slots)
+  -f1         Decode P25 Phase 1
+  -fx         Decode X2-TDMA
+  -fp         Decode ProVoice
+  -fm         Enable dPMR decoding (no audio)
+
+  -1          Synthesize audio for first DMR timeslot
+  -2          Synthesize audio for second DMR timeslot
+
+  -UA<num>    AMBE unvoiced speech level (0-100) [-UA50]
+  -UI<num>    IMBE unvoiced speech level (0-100) [-UI50]
+  -u<num>     Unvoiced speech quality (1-64) [-u3]
+  -e          Auto-mute encrypted voice
+
+Advanced decoder options:
+  -dr<num>    Rolloff filter (1-11; 0=auto) [-dr0]
+  -dh<num>    Hotspot size (1-8; 0=auto) [-dh0]
+  -ds<num>    Scaling factor (55-75; not used with D-Star or ProVoice) [-ds64]
+  -dd<num>    Damping level (1-100; not used with D-Star or ProVoice) [-dd10]
+  -dv<num>    Viewport size (1-30; not used with D-Star or ProVoice) [-dv20]
+
+Active keys:
+  ?           Display active keys list in event log window
+  1           Synthesize audio for first DMR timeslot
+  2           Synthesize audio for second DMR timeslot
+  3           Synthesize audio for both DMR timeslots
+  -           Toggle command line options display
+  |           Toggle symbol phase display
+  A/a         Adjust AMBE unvoiced audio level
+  B           Show/hide background events in event log window
+  E           Toggle auto-muting of encrypted voice
+  F           Forget current system information
+  H           Cycle high contrast modes
+  I/i         Adjust IMBE unvoiced audio level
+  N           Reset/redisplay neighbor list
+  P           Toggle signal polarity
+  R           Start/stop recording of raw source audio to wav file
+  S           Close/reopen source audio waveform display
+  V           Toggle voice call start alerts
+  W           Display window locations and high contrast value
+  Spacebar    Hold on current call
+  Esc         End program
+
+Source Audio Window:
+  Right click   Pause/unpause source audio waveform display
+
+Channel Activity Window:
+  Left click on priority    Increase traffic priority
+  Right click on priority   Decrease traffic priority
+  Left click on target      Increase priority override
+  Right click on target     Decrease priority override
+  Left click on headings    Clear all lockouts
+  Right click on headings   Clear hold
+
+
+
+Run Modes
+---------
+
+The program can decode live discriminator audio or recorded .wav files.
+Recorded audio files must be 48 or 96 kHz 16 bit mono PCM .wav files.
+
+
+
+Trunk Voice Following
+---------------------
+
+Consult the Trunking.txt file.
+
+
+
+Logging
+-------
+
+-v -t -T -E
+-v0 generates minimal output.
+Use -v3 or -v4 for maximum data logging.
+-t and -T add timestamps to console log entries
+-E adds NAC/RAN/DCC/RAS data to event log entries
+Program output can be sent to a log file ( DSDPlus >logfile )
+
+
+
+Input/Output
+------------
+
+-i -o
+WaveIn/Out devices are listed at program startup.
+Select your devices if you don't want to use the defaults.
+
+If raw audio is coming from FMP or FMPA, a TCP connection should be used;
+just specify a high port number (like 20000) in FMP/FMPA (-o20000) and DSD+ (DSDPlus -i20000)
+If FMP/FMPA and DSD+ are running on different PCs, add the FMP/FMPA PC's IP address like so:
+DSDPlus -i192.168.1.123:20000
+
+Use -o0 to disable output audio.
+
+
+-O
+By default, all synthesized audio is written/appended to DSDPlus.wav
+Use -O name.ext to write synthesized audio to another .wav or .mp3 file.
+Use -O NUL to disable recording of synthesized audio.
+
+-I
+Use -I# to start a new synthesized audio recording file every # minutes.
+
+
+
+Per-Call Audio Files
+--------------------
+
+-Pwav
+
+Creates separate .wav files for each voice transmission.
+
+
+
+Decoder Options
+---------------
+
+-fa
+Using -fa (or nothing) will (usually) auto-decode all supported protocols.
+Polarity of signals is auto-detected.
+Note: -fa does not enable dPMR detection; -fm must be used to enable dPMR
+
+-fd -fn -fN -fr -f1 -fx -fp -fm
+When monitoring a single type of traffic, locking the protocol can provide
+slightly better decoding results.
+Note: more than one protocol can be enabled via the command line.
+
+-u
+Lower values (slightly) reduce CPU load.
+
+-UA<num> -UI<num>
+Controls AMBE and IMBE unvoiced speech levels; lower levels reduce "underwater" sounds.
+
+-e
+Use to enable auto-muting of encrypted voice traffic
+
+
+
+Advanced Decoder Options
+------------------------
+
+Fine tuning the advanced decoder options can greatly increase decoding rates.
+
+Different systems, protocols, receivers and PC sound devices require unique
+fine tuning values.
+
+A 15 to 60 second recording of a target system should be made and used as the input
+for tuning runs.  Use the 'R' key to make recordings.
+Recordings of voice, control or rest channels are all useable.
+
+To speed up the tuning process, audio synthesis should be disabled
+and the protocol should be locked correctly:
+
+DSDPlus -o0 -O NUL -f1 ? rawAudio.wav
+
+A decoding score will be displayed.
+
+Pressing the up arrow will redisplay the previous command line,
+which you can then edit and re-run.
+
+Adjust a single parameter to determine which value produces the highest score:
+
+DSDPlus ? rawAudio.wav -o0 -O NUL -f1 -dr1
+DSDPlus ? rawAudio.wav -o0 -O NUL -f1 -dr2
+DSDPlus ? rawAudio.wav -o0 -O NUL -f1 -dr3
+DSDPlus ? rawAudio.wav -o0 -O NUL -f1 -dr4
+
+When the optimal value for a tuning parameter is determined,
+use that value (#) and add another parameter and repeat the tuning steps:
+
+DSDPlus ? rawAudio.wav -o0 -O NUL -f1 -dr# -dh1
+DSDPlus ? rawAudio.wav -o0 -O NUL -f1 -dr# -dh2
+DSDPlus ? rawAudio.wav -o0 -O NUL -f1 -dr# -dh3
+...
+
+Repeat until all advanced decoding options have been fine tuned.
+
+
+The recommended order for adjusting tuning parameters is:
+
+ 1: Rolloff filtering (-dr)
+ 2: Hotspot size (-dh)
+ 3: Scaling factor (-ds)
+ 4: Damping level (-dd)
+
+Viewport tuning is rarely worth bothering with.
+
+Scaling and Damping settings do not affect D-Star or ProVoice,
+so don't bother tweaking them for those protocols.
+
+
+You do NOT have to try every value for a tuning parameter:
+
+ Rolloff: start at 1 and go up by 1 until the score starts trending down
+
+ Hotspot: most signals prefer an even hotspot size (usually 2, sometimes 4);
+          a few signals prefer an odd hotspot size; testing 1, 2, 3 and 4 will
+          settle the odd/even question; continue until the score trends down
+
+ Scaling: test only 55, 60, 65, 70, 75; best is usually in the 60-65 range
+
+ Damping: start testing at 5; increment by 5 or 10; watch the trend...
+
+
+Check your tuning by re-enabling voice synthesis:
+
+DSDPlus -f1 -dr# -dh# -ds# -dd# -dv# ? rawAudio.wav
+
+
+   -or-
+
+Just use the third party program - dsdtune.
+
+
+When the optimal values for a system + receiver + sound input is determined,
+consider creating a batch file to store the settings:
+
+Local-PD.bat:
+
+DSDPlus -f1 -dr1 -dh3 -ds66 -dd40 -dv20 -O PD.mp3
+
+DMR.bat:
+
+DSDPlus -fd -d21 -dh2 -ds58 -dd5 -dv20 -O DMR.mp3
+
+Then to monitor a specific system, run its batch file.
+
+If you prefer, instead of batch files, you can create desktop shortcuts.
+
+
+If you scan multiple systems and protocols with a single receiver,
+you can run multiple copies of DSDPlus in parallel with each one
+protocol-locked and fine tuned as required.  Each copy of the program
+should write synthesized audio to separate files.
+
+
+
+Active Keys
+-----------
+
+?
+
+'?' generates a list of keyboard commands in the event log window.
+
+1
+2
+3
+
+When monitoring conventional DMR systems, you may want to block voice
+synthesis for one timeslot.  Press 1 or 2 to enable only one timeslot.
+Press 3 to enable both timeslots.
+
+-
+Display of the command line parameters in the console window title
+is enabled/disabled by pressing the '-' key.
+
+|
+The symbol phase display in the console window title
+is enabled/disabled by pressing the '|' key.
+
+A/a
+Adjusts AMBE unvoiced audio level; lower values reduce "underwater" sounds
+
+B
+The display of background events (like LRRP updates) in the event log window
+is enabled/disabled by pressing the 'B' key.
+
+E
+Use to enable or disable auto-muting of encrypted voice traffic.
+
+F
+Use when switching from monitoring a trunking system to a conventional system,
+for example from DMR Con+ to DMR conventional.
+
+H
+Press 'H' in each window to change its high contrast display mode.
+
+I/i
+Adjusts IMBE unvoiced audio level; lower values reduce "underwater" sounds
+
+N
+Press 'N' to force DSD+ to regather and display the current trunking site's
+neighbor list in the event log window.  Useful for when the neighbor list has
+scrolled off the window.
+
+P
+Press 'P' to toggle the raw signal polarity.  You may need to do this when
+decoding X2-TDMA or dPMR signals.
+
+R
+'R' starts/stops recording of discriminator audio.  Use 'R' to make 60
+second source recordings of tuning data.  Rename the files to identify
+what they are.
+
+S
+If the source audio window has been closed, this key will reopen it.
+
+V
+This toggles voice call start alerting; DSD+ will beep each time a voice call starts.
+
+W
+When the source audio, event log and channel activity windows have been
+placed onscreen where you want them, this key will display their current
+locations in the event log window.  You can copy these locations to
+a batch file or shortcut.
+
+Esc
+To terminate real time decoding or .wav file processing, press Esc.
+
+
+
+Window Title
+------------
+
+The window title area shows the command line parameters used (unless -- specified),
+symbol tracking/centering, auto-scaling factor, output audio gain,
+symbol rate (2400/4800/9600), and protocol.
+
+During raw audio recording, "<REC>" is displayed.
+
+
+
+Data files
+----------
+
+DSDPlus.networks
+
+You can populate the DSDPlus.networks file with the network IDs and
+network names for NEXEDGE, Connect Plus and Tier III trunking systems.
+DSD+ will display the network names when those networks are monitored.
+You can add or edit network entries in this file while DSD+ is running.
+
+DSDPlus.sites
+
+The names for each site on a network can be stored in this file.
+Some non-networked DMR systems also broadcast system IDs,
+so entries for them can also be added to this file.
+DSD+ will use the contents of this file to display the name of the
+currently monitored site as well as the names of sites in neighbor lists.
+You can add or edit site entries in this file while DSD+ is running.
+
+DSDPlus.groups
+
+DSD+ will auto-populate this file with every group ID that is seen.
+You can edit this file while DSD+ is running and add names/aliases to
+group records.
+
+DSDPlus.radios
+
+DSD+ will auto-populate this file with every radio ID that is seen.
+You can edit this file while DSD+ is running and add names/aliases to
+radio records.  This file replaces the DSDPlus.aliases file; if you
+already have a large aliases file, you can use a text editor's
+search/replace functionality to convert the contents of your aliases file
+to match the format used in the radios file.
+
+NOTE:
+
+Radio aliases are auto-generated on NEXEDGE systems.  DSD+ marks auto-generated
+NEXEDGE radio aliases in the DSDPlus.radios file by prepending an asterisk like so:
+
+NEXEDGE, ... yyyy/mm/dd hh:mm,   *"aliastext"
+
+If you edit a NEXEDGE alias, you must remove the asterisk; this tells DSD+ that
+the new alias text is NOT auto-generated and DSD+ will not replace it with OTA alias text.
+
+
+DSDPlus.frequencies
+
+DSD+ uses this file to display frequency information when DSD+ is monitoring
+a rest channel or control channel.  The frequency records will also be
+used to control channel steering for trunked voice following.
+
+Note:
+
+DSD+ uses two channel numbers for each DMR RF channel:
+
+  Channel #1 = first RF channel, timeslot 1
+  Channel #2 = first RF channel, timeslot 2
+  Channel #3 = second RF channel, timeslot 1
+  Channel #4 = second RF channel, timeslot 2
+  Channel #5 = third RF channel, timeslot 1
+  Channel #6 = third RF channel, timeslot 2
+  ...
+
+For all DMR systems (DMR, Cap+, Con+, TIII), only one channel record has
+to be added to the DSDPlus.frequencies file for each RF channel.
+You can use the channel number that corresponds to timeslot 1 or 2 and
+DSD+ will use the same frequency information for the other timeslot.
+
+
+All of the records in these data files have a protocol field;
+DSD+ recognizes the following protocol name strings:
+
+  D-Star
+  IDAS
+  NEXEDGE48
+  NEXEDGE96
+  dPMR
+  DMR
+  Cap+
+  Con+
+  TIII
+  XPT
+  P25
+  ProVoice
+
+
+
+DMR TIII handling
+-----------------
+
+Tier III control channels broadcast a 14 bit identifier that indicates
+the network model (tiny/small/large/huge), network ID, service area
+and site number for the current site and for neighboring sites.
+
+Many TIII DMR systems are set up using these programming defaults:
+
+  large network (uses a 4 bit NID field)
+
+  NID = 13
+
+  Service area field length: 5 bits
+
+  Site number field length: 3 bits
+
+Physical sites are typically assigned unique area numbers (1, 2, 3, ...)
+while their site numbers are all set to 1.  So odds are good that any network
+you find will have sites with area.site values of 1.1, 2.1, 3.1, etc.
+
+When -v3 or higher is used, DSD+ will display a site's 14 bit "SysCode" in binary.
+
+Example:
+
+  CSBK Aloha  SysCode=10.1100.00010000
+
+The first two bits encode the network model value.  Here, 10 = large model.
+
+The next set of digits encodes the network ID.  A zero value is used for NID 1,
+so here, 1100 = 12 = NID 13.
+
+The last set of digits encodes the area number and the site number.
+Since these two fields do not have a fixed length, DSD+ cannot automatically
+decode them.  The dividing line between the two fields is selected when the
+network is created.  This is similar to the variability found in Motorola Type I
+fleetmaps.
+
+To determine the correct field sizes, gather as many SysCodes as possible
+by monitoring system sites and examining their neighbor lists.
+
+Example:
+
+  CSBK Bcast  SysCode=10.1100.00010000  Neighbor SysCode=10.1100.00000000, CC=600
+  CSBK Bcast  SysCode=10.1100.00010000  Neighbor SysCode=10.1100.00001000, CC=622
+
+From this small sample we have these SysCodes:
+
+  10.1100.00000000
+  10.1100.00001000
+  10.1100.00010000
+
+It becomes clear that the SysCodes should be decoded as:
+
+  10.1100.00000 000  Model=large NID=13 Area=1 Site=1
+  10.1100.00001 000  Model=large NID=13 Area=2 Site=1
+  10.1100.00010 000  Model=large NID=13 Area=3 Site=1
+
+So here, the area length is 5 and the site length is 3.
+
+In the DSDPlus.networks file, an area length value can be appended to TIII
+network records, so if the following line is added
+
+  TIII, 13, "network name goes here", 5
+
+DSD+ will use the supplied area length value to properly decode this system's
+SysCode fields.
+
+These TIII sites can be added to the DSDPlus.sites file as:
+
+  TIII, 13, 1.1, "site name goes here"
+  TIII, 13, 2.1, "site name goes here"
+  TIII, 13, 3.1, "site name goes here"
+
+The records in the DSDPlus.frequencies file also reference site numbers;
+for TIII sites, use the same area.site format:
+
+  TIII, 13, 1.1, 600, 462.0, 0.0, 0
+  TIII, 13, 2.1, 622, 462.3, 0.0, 0
+
+
+
+DSD+ Fast Lane
+--------------
+
+Early access to features is being offered through the DSD+ Fast Lane program.
+
+Fast Lane updates are expected to be released about once per month.
+
+Some Fast Lane updates WILL have issues/bugs.  That is the nature of alpha software.
+
+Fully tested public releases will continue to be released, approximately every 6 months.
+
+
+In light of the extra workload the Fast Lane program will create,
+the DSD+ team is asking Fast Laners for:
+
+  US$10 for one year of Fast Lane updates
+
+  US$25 for unlimited Fast Lane updates
+
+Donations above these amounts are welcomed, but it's up to you.
+We're not looking to get rich here.  Funds will be used for things like
+needed hardware upgrades.
+
+Funds can be sent our Paypal account (dsdplusfastlane@gmail.com)
+
+Please include a comment that specifies the email address that
+your Fast Lane updates should be sent to.
+
+NOTE: IF YOU DO NOT INCLUDE A COMMENT, PAYPAL DOES NOT SEND US A NOTIFICATION.
+      THIS *WILL* DELAY YOUR FIRST FAST LANE UPDATE.
+
+--

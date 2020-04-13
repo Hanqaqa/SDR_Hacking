@@ -1,0 +1,148 @@
+
+DSD+ / FMP Trunk Voice Following
+--------------------------------
+
+
+Note:  NEXEDGE, Con+ and TIII (Hytera) trunking are fully supported
+
+       Cap+ trunking is less supported (no rest channel following)
+
+
+Note:  In order for trunk voice following to work, your DSDPlus.frequencies
+       file *must* contain correct channel information for the systems / sites
+       you wish to monitor.  If you have not done this, DSD+ cannot translate
+       the over-the-air channel numbers into RF channel frequencies.  If you
+       do not provide correct information, DSD+ will steer FMP to incorrect
+       voice frequencies or do no tuning at all.
+
+
+Note:  Where this document references RTL SDR dongles and the FMP program,
+       you can substitute Airspy receivers and the FMPA program.
+       E.g. where this document discusses using RTL SDR dongles in conjuction
+       with FMP, Airspy/FMPA is equally applicable.
+
+
+DSD+ trunk voice following uses two RF sources (control and voice) and
+two instances of DSD+ (control and voice)
+
+The control signal source can be any NFM receiver whose flat audio is piped to
+DSD+ via a mic or line in input, or an SDR device (RTL SDR dongle, Airspy, etc.)
+whose demodulated audio is routed to DSD+ via Virtual Audio Cable, VB Cable or a CP link.
+
+The voice channel source must be a RTL SDR dongle that is being controlled by FMP or FMPA.
+FMP/FMPA's audio output should be routed to DSD+ via a TCP link.
+
+Sample batch files that run CC and VC copies of FMP/FMPA and DSD+ are provided;
+they should be modified to match your specific monitoring setup.
+
+
+
+Customizing
+-----------
+
+  the batch files assume that TCP port 20001 will be used for
+  CC FMP/FMPA --> CC DSD+ audio linking
+
+  the batch files assume that TCP port 20002 will be used for
+  VC FMP/FMPA --> VC DSD+ audio linking
+
+  if you are not using FMP or FMPA to feed the CC copy of DSD+, i.e. you're using
+  a tapped radio or a program like SDR#, edit the CC.BAT file reflect the
+  correct waveIn device number
+
+  the PPM correction values in the FMP batch files should be changed to match your devices
+
+
+
+Trunking
+--------
+
+  all batch files are designed to be run from your usual DSD+ folder;
+  either start four console windows in that folder, or if using desktop shortcuts
+  to run the batch files, specify that those shortcuts start in your usual DSD+ folder
+
+
+  the CC source receiver can be a RTL SDR dongle, an Airspy or a discriminator-tapped radio
+
+  if using a RTL SDR dongle, run the FMP-CC batch file, tune to an active CC,
+  then adjust RF bandwidth filtering, RF gain, etc. as required
+
+    pressing '?' will list all active keys in FMP's console window
+
+  if using an Airspy, run the FMPA-CC batch file, tune to an active CC,
+  then adjust RF bandwidth filtering, RF gain levels, etc. as required
+
+  run the CC batch file to start the CC-decoding copy of DSD+
+
+    if you have your CC audio routed correctly, DSD+ should start decoding and scrolling
+
+
+  the VC source receiver *must* be a RTL SDR dongle or an Airspy
+
+
+  run the FMP-VC or FMPA-VC batch file; FMP/FMPA should automatically enter trunk-following mode
+
+    RF gain can be adjusted as required at any time
+
+    you should see FMP/FMPA tuning to voice channels as comms show up on the CC
+
+
+  run the VC batch file to start the VC-decoding copy of DSD+
+
+    if you have your VC audio routed correctly, DSD+ should decode voice
+    traffic as comms show up on the CC
+
+
+Notes
+-----
+
+  the DSD+ window locations specified in the batch files are designed for
+  a 1024x600 display screen
+
+  for other screen sizes, move the DSD+ windows to more suitable locations
+  and then press 'W' in each copy of DSD+; the current window locations
+  will be listed in the event log windows; edit the CC and VC batch files
+  to reflect the new screen locations
+
+
+  as voice call announcements are broadcast on the control channel,
+  the CC copy of DSD+ will create .traffic files
+
+  the VC copy of FMP/FMPA will use these .traffic files to tune to voice channels
+
+  FMP/FMPA will auto-select the RF bandwidth for followed voice calls
+
+
+  the two copies of DSD+ will share/read/write the
+  network/site/group/radio/frequency data files
+
+  the data files may be edited (with Notepad, etc.) while DSD+ is running;
+  any changes made will be picked up by DSD+
+
+
+
+DSD+
+
+  new command line parameters:
+
+    -rc  DSD+ role is rest/control channel monitor
+
+    -rv  DSD+ role is voice channel monitor
+
+
+  traffic priorities can be raised and lowered by left/right clicking on comms
+  in the CC channel activity window
+
+    click in priority fields to change group priorities
+
+    click in target alias/number fields to change group priority overrides
+
+  higher priority traffic will preempt lower priority traffic
+
+  left clicking on the CC channel activity window column headings will
+  unlock any locked out talkgroups
+
+  right clicking on the CC channel activity window column headings will
+  clear an active hold
+
+--

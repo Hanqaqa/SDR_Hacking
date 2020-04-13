@@ -1,0 +1,7 @@
+
+; DSD+ radio records
+;
+; you can edit this file while DSD+ is running
+;
+; line format: protocol, networkID, group, radio, priority, override, hits, timestamp, "radio alias"
+

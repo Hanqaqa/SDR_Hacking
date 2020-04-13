@@ -1,0 +1,180 @@
+
+Changes from DSD+ 1.074 to DSD+ 1.101
+-------------------------------------
+
+
+  DSD+: Fixed AMBE tone frame audio generation.
+
+
+  FMA: Added Airspy-compatible FMP (FMPA.exe)
+
+
+  DSD+: Significant reduction in CPU usage when monitoring busy control channels.
+  Improvement will be most noticeable on low power processors.
+
+
+  DSD+: Detection and decoding of Hytera Extended Pseudo Trunk (XPT) systems.
+
+
+  DSD+: The DSD+ -i command line parameter can contain an IPV4 address;
+  this lets DSD+ connect to a copy of FMP that is running on a different
+  PC in your local network or on the Internet
+
+    Example:  DSDPlus -i192.168.1.150:20001
+
+
+  DSD+: NEXEDGE radio alias editing
+
+    DSD+ now marks auto-generated NEXEDGE radio aliases in the DSDPlus.radios
+    file by prepending an asterisk like so:
+
+      NEXEDGE, ... yyyy/mm/dd hh:mm,   *"aliastext"
+
+    If you edit a NEXEDGE alias, you must remove the asterisk; this tells
+    DSD+ that the new alias text is NOT auto-generated and DSD+ will not
+    replace it with OTA alias text
+
+
+  FP: FMP command line processing
+
+    The FMP command line format has been modified and is now similar to
+    the DSD+ command line.  A summary is listed here:
+
+      FMP rev 1.4t
+
+      Usage:
+        FMP [options]   Normal operation
+        FMP -h          Show help
+
+      Options:
+        -i<num>     RTL SDR device number (1-255) [-i1]
+        -o<num>     Output audio device (1-255) [-o1]
+        -o<port>    Output audio TCP port (256-65535)
+        -P<num>     PPM value (-999.9-999.9) [-P0.0]
+        -g<num>     RF gain (dB) [max]
+        -f<MHz>     Initial tuned frequency [-f99.9]
+        -b<kHz>     Initial filter bandwidth (4, 7, 9.5, 12.5) [-b7]
+        -z<num>     Show zoomed spectrum (0-1) [-z1]
+        -e<num>     Enable/disable economy mode (0-1) [-e1]
+        -n<num>     Select noise filter (0-2) [-n0]
+        -v<num>     Set volume level (0-500) [-v100]
+        -s<num>     Enable/disable scanner mode (0-1) [-s0]
+        -wsl<v>.<h> Spectrum window location [-wsl50.50]
+        -_<num>     Minimize windows at startup; bitmapped
+        -rv         Role is trunk voice channel monitor
+
+    -rv puts FMP into voice following mode (same as pressing 'V' in FMP)
+
+    Any shortcuts or batch files that run FMP will have to be modified
+    to match the new command line format.
+
+
+  DSD+: Less processor loading (probably only noticeable on very slow processors)
+
+
+  DSD+: Much faster groups/radios files loading/saving
+
+
+  DSD+: Editing existing radio aliases
+
+    In previous versions of DSD+, editing of pre-existing radio aliases
+    can not be done with an external text editor while DSD+ is running;
+    only radio records with no alias text can be edited
+
+    With DSD+ 1.092, existing radio alias text can be edited in an
+    external text editor while DSD+ is running; DSD+ will load and display
+    any updated radio aliases
+
+
+  DSD+: A DSDPlus.radios file corruption bug has been fixed
+
+
+  DSD+: A command line option to add system details to event log entries has been added
+
+    -E          Add NAC/RAN/DCC/RAS data to event log file entries
+
+
+  DSD+: Decoding of more DMR and TIII messages has been added
+
+
+  DSD+: A symbol recovery bug has been fixed
+
+
+  DSD+: Con+ handling has been modified; previous versions of DSD+ would create
+  "DMR" entries in the DSDPlus.groups and DSDPlus.radios files for traffic
+  on monitored voice channels; DSD+ 1.090 creates "Con+" entries; if you
+  have "DMR" entries with nonzero NID fields, you should either bulk delete
+  them or change their protocol string from "DMR" to "Con+"; Notepad has a
+  simple search/replace function that can be used to do this
+
+
+  DSD+: A command line option to minimize windows at startup has been added
+
+    -_<num>     Minimize selected windows at startup (bitmapped, 0-15) [-_0]
+
+    value  window
+
+      1    console
+      2    source audio
+      4    channel activity
+      8    event log
+
+    sum values to minimize multiple windows
+
+
+  DSD+: Several high contrast display modes have been added
+
+    -H<num>     High contrast mode (bitmapped, 0-63) [-H0]
+
+    two bits are used per graphical window; pressing 'H' in a window will
+    cycle it to the next display mode; pressing 'W' displays the current
+    -H<num> value in the event log window
+
+
+  DSD+: Control of AMBE and IMBE unvoiced audio levels has been added
+
+    -UA<num>    AMBE unvoiced speech level (0-100) [-UA50]
+    -UI<num>    IMBE unvoiced speech level (0-100) [-UI50]
+
+    pressing 'A'/'a'/'I'/'i' will also adjust the levels;
+    lower levels may reduce the "underwater" sound of some comms
+
+
+  DSD+: DSD+ can get its raw audio source from FMP via a TCP link instead of
+  via Virtual Audio Cable or VB-Cable
+
+    -i<TCPport> FMP TCP link port number (256-65535)
+
+    linking FMP to DSD+ via VAC or VBC is deprecated; please use the TCP
+    link feature instead; any port number between 10000 and 65000 should be fine
+
+
+  DSD+: DSD+ can record separate .wav files for each voice call
+
+    -P<wav|mp3> Also create per-call wav or mp3 files
+
+    the file names encode metadata:
+
+      time
+      duration
+      protocol
+      NID
+      site number
+      NAC/RAN/DCC/slot
+      call type (group/private)
+      target
+      source
+
+    note: per-call mp3 files are not supported at this time
+
+
+  FMP: A command line option to minimize windows at startup has been added
+
+    -_<num>     Minimize selected windows at startup (bitmapped, 0-3) [-_0]
+
+    value  window
+
+      1    console
+      2    spectrum display
+
+--

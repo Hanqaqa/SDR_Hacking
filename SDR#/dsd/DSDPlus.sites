@@ -1,0 +1,8 @@
+; DSD+ sites file
+;
+; you can edit this file while DSD+ is running
+;
+; line format: protocol, networkID, siteNumber, "site name"
+;
+;  for TIII, siteNumber format = area.site
+

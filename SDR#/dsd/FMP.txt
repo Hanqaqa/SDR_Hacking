@@ -1,0 +1,590 @@
+
+FMP
+---
+
+  FMP is a simple RTL-SDR dongle tuner / NFM demodulator.  It samples at 1 MHz, so its spectrum
+  display spans 1 MHz of the RF spectrum.  FMP is designed for low power devices like low end
+  netbooks where CPU and screen resources are limited.
+
+
+  Command line parameters and active keys summary:
+
+    Usage:
+      FMP [options]   Normal operation
+      FMP -h          Show help
+
+    Options:
+      -i<num>     RTL SDR device number (1-255) [-i1]
+      -o<num>     Output audio device (1-255) [-o1]
+      -o<port>    Output audio TCP port (256-65535)
+      -P<num>     PPM value (-999.9-999.9) [-P0.0]
+      -g<num>     RF gain (dB) [max]
+      -f<MHz>     Initial tuned frequency [-f99.9]
+      -b<kHz>     Initial filter bandwidth (4, 7, 9.5, 12.5) [-b7]
+      -z<num>     Show zoomed spectrum (0-1) [-z1]
+      -e<num>     Enable/disable economy mode (0-1) [-e1]
+      -n<num>     Select noise filter (0-2) [-n0]
+      -v<num>     Set volume level (0-500) [-v100]
+      -s<num>     Enable/disable scanner mode (0-1) [-s0]
+      -wsl<v>.<h> Spectrum window location [-wsl50.50]
+      -_<num>     Minimize windows at startup; bitmapped
+      -rv         Role is trunk voice channel monitor
+
+    Active keys:
+     0-9 . Enter  set frequency
+             [/]  select step size
+             /  step frequency
+        Ctrl /  step frequency by 250 Hz
+
+               M  toggle spectrum memory overlay
+               X  reset spectrum memory
+               Z  toggle spectrum zoom overlay
+               I  select injection mode
+               B  select bandpass filter
+               E  toggle economy mode
+               F  select noise filter
+             /  adjust volume level
+        spacebar  toggle muting
+
+             g/G  adjust RF gain
+             c/C  adjust frequency correction
+
+               R  toggle raw I/Q and FM demod recording
+
+               S  start scanner mode or exit hold mode
+               V  start trunk voice following mode
+
+               ?  list active keys
+             Esc  exit scanner mode or exit program
+
+     Left click on spectrum: retune
+
+
+
+  All FMP command line parameters are optional.  The defaults are shown above in square brackets.
+  Parameters that you may need to specify for correct operation are:
+
+
+    -i<num>     RTL SDR device number (1-255) [-i1]
+
+      If you have more than one RTL device plugged in, use -i to select the correct device.
+
+
+    -o<num>     Output audio device (1-255) [-o1]
+    -o<port>    Output audio TCP port (256-65535)
+
+      Use -o to route FMP's demodulated audio to your PC speakers or to an application.
+      When FMP starts, it lists all audio devices and their corresponding device number.
+
+      Use -o with a TCP port number if routing audio to DSD+.  Any port number between
+      20000 and 65500 should work.  When running multiple copies of FMP, each should use
+      a unique port number.  Specify the same port number(s) on the DSD+ command line(s)
+      with -i<port>.
+
+      It is likely that you will have to configure the Windows firewall to let FMP act
+      as a server.  Typically, Windows will automatically display a prompt asking if you
+      want to allow FMP to act as a server.
+
+
+    -P<num>     PPM value (-999.9-999.9) [-P0.0]
+
+      This is the same value that is used in programs like SDR# to correct for reference
+      oscillator drift.
+
+
+    -f<MHz>     Initial tuned frequency [-f99.9]
+
+      This is the initial frequency (in MHz) to tune the dongle to.  Alternately, when FMP
+      starts, you can just type in a frequency value and press Enter.
+
+
+    -rv         Role is trunk voice channel monitor
+
+      If an FMP instance is being used to tune to trunked voice traffic, -rv should be
+      included on FMP's command line.  This tells FMP to watch for tuning commands coming
+      from DSD+.
+
+
+  The remaining FMP command line parameters are listed here.  Detailed descriptions for
+  most features are presented later in this document.
+
+
+    -h          Show help
+
+      displays all FMP command line parameters, active keys and mouse commands
+
+
+    -g<num>     RF gain (dB) [max]
+
+      this sets the initial RF gain level
+
+      the available gain levels are determined by the tuner hardware
+
+
+    -b<kHz>     Initial filter bandwidth (4, 7, 9.5, 12.5) [-b7]
+
+      this set the initial bandpass filter width
+
+
+    -z<num>     Show zoomed spectrum (0-1) [-z1]
+
+      this enables or disables the zoomed spectrum display
+
+
+    -e<num>     Enable/disable economy mode (0-1) [-e1]
+
+      this enables or disables economy mode
+
+
+    -n<num>     Select noise filter (0-2) [-n0]
+
+      this selects a noise filter, or no noise filter
+
+
+    -v<num>     Set volume level (0-500) [-v100]
+
+      this sets the initial volume level for demodulated audio
+
+
+    -s<num>     Enable/disable scanner mode (0-1) [-s0]
+
+      this can be used to auto-start scanner mode
+
+
+    -wsl<v>.<h> Spectrum window location [-wsl50.50]
+
+      this can be used to set the location of FMP's spectrum display window on your desktop
+
+      pressing ? while FMP is running will display the spectrum window's current location
+
+
+    -_<num>     Minimize windows at startup; bitmapped
+
+      -_0: minimize no windows when FMP starts
+      -_1: minimize console window when FMP starts
+      -_2: minimize spectrum display window when FMP starts
+      -_3: minimize both windows when FMP starts
+
+
+  FMP uses a configuration file (FMP.cfg); its contents are:
+
+
+    line 1: sampling rate; DO NOT CHANGE
+
+
+    line 2: window width; DO NOT CHANGE
+
+
+    line 3: FFT size
+
+      8, 16 or 32
+
+      Lower values use less CPU resources.
+
+      Higher values produce better spectrum displays, but use more CPU resources.
+
+
+    line 4: spectrum update rate
+
+      Reasonable range is 5 to 20.
+
+      Lower values use less CPU resources.
+
+      Higher values better catch brief transmissions on the spectrum display.
+
+
+    line 5: step size table
+
+      In FMP, you can use the left/right cursor keys to retune up or down by one channel;
+      use this table to specify all of the step sizes that you will want to be available
+      for your use; add a minus sign in front of the step size you want FMP to initially use.
+
+
+    line 6: primary frequency list
+    line 7: secondary frequency list
+
+      See the frequency lists description at the end of this document.
+
+
+    line 8: search units
+
+      Used with frequency lists.
+      Should be miles or kilometers.
+      (protip: FMP just looks for the presence of a 'k' or lack thereof)
+
+
+    line 9: search distance
+
+      Used with frequency lists.
+      Should match about how far you might expect to RX signals from.
+
+
+    line 10: search origin
+
+      Used with frequency lists.
+      This should be your monitoring location; units are decimal degrees.
+
+
+    lines 11+:
+
+      You can stash extra search origins after line 10; FMP will not see them.
+      If you change monitoring locations (like work, home), cut/paste as required.
+
+
+
+  FMP keys
+
+
+    help
+
+      press ? key
+
+      help is displayed in FMP's console window
+
+
+    volume level
+
+      use cursor up/down keys
+
+      should be left at 100% when feeding a digital decoder like DSD+
+
+      spacebar mutes/unmutes demodulated audio
+
+
+    noise filter
+
+      press F to select
+
+      filters may help or hinder when feeding a digital decoder
+
+      filter use is NOT recommended when feeding DSD+; DSD+ has its own noise filters
+
+
+    trunk voice following
+
+      press V to enable
+
+      press Esc to disable
+
+      this mode tells FMP that it is being used to follow trunk voice traffic
+
+      FMP will watch for tuning commands sent from DSD+ and will auto-tune to voice traffic
+
+      this mode is normally set on the command line (-rv)
+
+      the Trunking.txt file has detailed information on trunk voice following
+
+
+    tuning
+
+      tuned frequency is displayed in window title
+
+      the thin white vertical background shows the tuning point and
+      the RF bandpass filter width
+
+
+    direct tuning
+
+      enter frequency in MHz (nnn.nnnnnn) and press Enter
+
+      as digits are entered, they are displayed in spectrum window title
+
+
+    mouse tuning
+
+     move mouse over spectrum display
+
+     targeted frequency is displayed
+
+     left click to retune
+
+
+    step tuning
+
+      cursor left/right to step up/down one channel
+
+      FMP will retune up or down by the current step size amount
+
+
+    step size
+
+      the [ and ] keys select the previous/next step size
+      from the custom step size table that was loaded from FMP.cfg
+
+
+    fine tuning
+
+      Ctrl cursor left/right steps up/down by 250 Hz
+
+
+    PPM correction
+
+      the current PPM adjustment value is displayed in window title
+
+      press C or c to adjust PPM up or down (commands are case-sensitive)
+
+
+    show/hide zoomed spectrum
+
+      press Z to toggle display on/off
+
+      zoomed spectrum shows tuned signal detail and centering in passband
+
+      higher FFT sizes (set in FMP.cfg) show finer detail
+
+      lighter background shows RF filter passband and transition bands
+
+      tuned signals should be centered in passband
+
+      majority of signal should be in passband
+
+      signal edges can be in transition bands
+
+
+    show/hide spectrum memory
+
+      press M to toggle display on/off
+
+      spectrum memory shows previous peak values; this makes it easy to find
+      exactly what frequency a brief, now gone transmission was on
+
+      moving the mouse pointer to a stored peak will show the signal's frequency
+
+
+    clear spectrum memory
+
+      press X to clear/reset the spectrum memory display
+
+
+    RF gain
+
+      current RF gain level is displayed in window title
+
+      press G or g to adjust gain up or down (commands are case-sensitive)
+
+      reduce gain for very strong signals
+
+      reduce gain if noise floor (background spectrum) is high
+
+      in environments with strong signals or a high noise floor,
+      start with RF gain maximized, then reduce gain while watching
+      the spectrum display; clipping artifacts (spikes) will diminish
+      or disappear as optimum gain levels are reached
+
+      Also, while the RF gain is too high, as you reduce RF gain,
+      the noise floor (the lowest parts of the spectrum display) will tend to
+      drop faster than the levels of valid signals; when everything drops
+      at the same rate, you have left the overdriven range
+
+      select optimal gain level by using DSDPlus -v3 and observing ERRn and e: values
+
+
+    RF bandpass filter selection
+
+      press B to cycle through filters
+
+      narrower filters reduce co-channel interference
+
+      narrower filters reduce noise levels
+
+      too-narrow filtering distorts digital waveforms
+
+
+      12.5 kHz
+
+        lowest CPU usage
+
+        highest noise levels
+
+        will not block co-channel signals
+
+
+      9.5 kHz
+
+        P25: reduces noise; eliminates most co-channel interference
+
+        NXDN9600: should work well
+
+
+      7 kHz
+
+        NXDN9600: should work well; low noise
+
+        DMR: matched filter
+
+
+      4 kHz
+
+        NXDN4800: matched filter; will eliminate most co-channel interference
+
+        D-Star: matched filter
+
+        DMR: reduces noise, but will distort waveforms (DSD+ can handle it)
+
+
+    economy mode
+
+      press E to toggle between normal and eco modes
+
+      eco mode uses less CPU resources
+
+      in eco mode, zoomed spectrum is green (duh)
+
+      quality of demodulated audio is reduced in eco mode;
+      effect on DSD+ decoding is minimal
+
+      analog signals should sound better in normal mode
+
+
+    injection mode
+
+      FMP normally tunes the device's local oscillator above the target signal;
+      pressing I toggles this tuning between above or below the target signal
+
+      changing injection mode shows you a different chunk of the spectrum
+
+      changing injection mode may allow you to move a strong interfering signal
+      out of the device's passband
+
+
+    scanning
+
+      FMP can (slowly) scan frequencies
+
+      a frequency list, one frequency per line, should be placed in a file
+      named FMP.ScanList
+
+      the format of each line is:
+
+        frequency  mode  description
+
+      example:
+
+        450.1250 TIII Acme Radio
+
+
+      frequency is in MHz
+
+
+      mode text controls bandpass filter selection
+
+        4 kHz modes:
+
+          D-STAR
+          DSTAR
+          IDAS
+          NX48
+          NEXEDGE48
+
+        7 kHz modes:
+
+          DMR
+          TRBO
+          Cap+
+          Con+
+          TIII
+
+        9.5 kHz modes:
+
+          NXDN
+          NEXEDGE
+          NEXEDGE96
+          NX96
+          P25
+
+        12.5 kHz modes
+
+          PV
+          ProVoice
+          any other text string (analog, LTR, ...)
+
+
+      blank lines in the file are ignored
+
+      processing of the FMP.ScanList file stops if a line containing
+      the string <EOF> is found; frequency entries that you don't want
+      to scan can be stored in the file after the <EOF> line
+
+
+      pressing S starts scanner mode
+
+      pressing Esc exits scanner mode
+
+      no other scanning commands (Hold, L/O, etc.) are presently implemented
+
+
+      FMP's scanner mode is designed to be used with DSD+.  FMP and DSD+
+      should be running in the same folder.  While DSD+ is decoding
+      digital voice, FMP will auto-hold on the current RF channel.
+      If DSD+ is not decoding digital voice, FMP will auto-scan to the
+      next channel in the scanlist.  This behaviour will let you monitor
+      multiple digital channels, including control or rest channels.
+      FMP will not get hung up on constant carriers that are not broadcasting
+      digital voice calls.
+
+
+    shutdown
+
+      press Esc to:
+
+        - exit scanning mode
+        - exit trunk voice following mode
+        - shut down FMP
+
+      FMP can also be shut down cleanly by clicking on the 'X' on the spectrum display window
+
+
+    reducing CPU load
+
+      these techniques are generally only required on low end machines
+
+      use economy mode (has minimal detrimental effects on DSD+)
+
+      use smaller FFT size
+
+      use lower spectrum update rate
+
+      completely hide or minimize spectrum window (suspends all FFT calculations)
+
+      if acceptable, use wider RF bandpass filters
+
+
+
+FMP Frequency Lists
+
+
+  Every time FMP is retuned, FMP will search the CSV files specified in FMP.cfg
+  for matching in-range frequency records.  The CSV files can be created from
+  government data sources or Internet sites.
+
+  Each line in the files holds one TX frequency record or a record for
+  a TX/RX frequency pair.  Each line contains eight fields.  Text fields must
+  use enclosing quote characters.  Fields must be separated by a comma and
+  a space.
+
+  Example data:
+
+; TXfreq, RXfreq, Licensee, Location, Latitude, Longitude, first emission mode, second emission mode
+
+461.1625, 466.1625, "example licensee", "example location", 35.1028, -80.9420, "16K0F3E", ""
+
+
+  When in-range matches are found, FMP displays them, sorted by distance,
+  in FMP's console window.  FMP also passes the closest match to FMP-Map.
+
+
+
+FMP-Map
+
+  FMP-Map is a near-clone of the LRRP.exe program.  FMP-Map will display
+  your monitoring location and the database hits that FMP passes to it.
+
+  When accurate and comprehensive frequency lists are provided to FMP,
+  the transmitter locations that FMP-Map displays will usually show you
+  the correct signal sources.
+
+  Like LRRP.exe, FMP-Map uses a configuration file and the ? key brings up
+  a help overlay.
+
+
+--

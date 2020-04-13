@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<TetraSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <LogFileNameRules>date \ frequency \ mcc "_" mnc "_" la</LogFileNameRules>
+  <LogEntryRules>date + time + mcc + mnc + la + cc + carrier + slot + callid + type + from + to + encryption + duplex</LogEntryRules>
+  <LogSeparator> ; </LogSeparator>
+  <LogEnabled>false</LogEnabled>
+  <BlockedLevel>0</BlockedLevel>
+  <TopMostInfo>false</TopMostInfo>
+  <NetworkBase>
+    <GroupsEntries>
+      <NMI>3506431</NMI>
+      <GSSI>0</GSSI>
+      <Name>Individual</Name>
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3506431</NMI>
+      <GSSI>10003</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3506431</NMI>
+      <GSSI>10006</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3506431</NMI>
+      <GSSI>10002</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>0</GSSI>
+      <Name>Individual</Name>
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>5514602</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>3620813</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>4601810</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>4601813</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>1918209</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>4601818</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>4601817</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>3620815</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>900115</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>12724901</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>4601812</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>4601826</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>4601811</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>4601816</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>5514610</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513830</NMI>
+      <GSSI>4602911</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513030</NMI>
+      <GSSI>0</GSSI>
+      <Name>Individual</Name>
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+    <GroupsEntries>
+      <NMI>3513030</NMI>
+      <GSSI>25601</GSSI>
+      <Name />
+      <Priopity>0</Priopity>
+      <Blocked>false</Blocked>
+    </GroupsEntries>
+  </NetworkBase>
+  <AutoPlay>true</AutoPlay>
+  <IgnoreEncodedSpeech>false</IgnoreEncodedSpeech>
+  <UdpEnabled>false</UdpEnabled>
+  <UdpPort>20025</UdpPort>
+  <AfcDisabled>true</AfcDisabled>
+</TetraSettings>

@@ -1,0 +1,32 @@
+; DSD+ frequency file
+;
+; you can edit this file while DSD+ is running
+;
+; line format:
+;
+;  protocol, networkID, siteNumber, OTAchannelNumber, TXfrequency, RXfrequency, sortOrder
+;
+;  for TIII, siteNumber format = area.site
+;
+;
+;   use site number = 0 for network-wide definition
+;
+;   use 0.0 for unknown frequencies
+;
+;   use sort order = 0 to sort by OTA channel number
+;
+;
+; protocols:
+;
+;  D-Star
+;  IDAS
+;  NEXEDGE48
+;  NEXEDGE96
+;  dPMR
+;  DMR
+;  Cap+
+;  Con+
+;  TIII
+;  P25
+;  ProVoice
+

@@ -1,0 +1,6 @@
+; DSD+ networks file
+;
+; you can edit this file while DSD+ is running
+;
+; line format: protocol, networkID, "network name"[, TIIIareaLength]
+
