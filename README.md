@@ -32,6 +32,8 @@ The possibilities are endless!, even though each application uses a different pr
 
 - **[GNU Radio](https://www.gnuradio.org/)**: The father of all the SDR applications. It is an Open Source development toolkit that provides signal processing blocks to implement software-defined radios and signal-processing systems. Requires a very good knowledge of all the modulation and demodulation techniques as well as general knowledge of flowgraph programming. There is a big number of premade modules. Available for all platforms.
 
+![GNURADIO](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/GNURADIO.PNG)
+
 ## **SDR in the law**
 
 Now comes the boring part. Although generally, you can't output any electromagnetic signal outside of a few selected areas, which are the [ISM bands](https://en.wikipedia.org/wiki/ISM_band). These are the only ones where you could output some signals without running into trouble with the law or requiring any special license (Ham radio operator), as long as you respect the power that you can output in each band.
@@ -42,6 +44,53 @@ En lo que se refiere a la ley española, [Ley 32/2003, de 3 de noviembre, Genera
 
 En el mismo Artículo 53, su epigrafe e) establece: *La producción deliberada de interferencias definidas como perjudiciales* también se consdierará como una infracción muy grave, es decir, deberemos de ser muy cuidadosos a la hora de probar las distintas funciones de nuestro SDR, siempre emitiendo en las frecuencias de las bandas que tengamos permiso. Aunque por lo general la baja potencia de estos aparatos  menos de 25mW, dificilmente podrá provocar interferencia alguna con aparatos, a no ser que se disponga de amplificadores.
 
-Now that we are read
+Now that we are on the same wave. Let's get to do some cool stuff with the HackRF One.
+
+## Signal Modulation
+
+In electronics and telecommunications, modulation is the process of varying one or more properties of a periodic waveform, called the carrier signal, with a modulating signal that typically contains information to be transmitted. Most radio systems in the 20th century used frequency modulation (FM) or amplitude modulation (AM) for radio broadcast.
+
+The three main modulation methods used today are:
+
+### Analog Modulation
+
+#### Amplitude Modulation
+
+#### Frequency Modulation
+
+### Digital Modulation
+
+#### Amplitude Shift Keying
+
+#### Frequency Shift Keying
+
+### Spread Spectrum Modulation
+
+#### Frequency Hopping Spread Spectrum
+
+## SDR#
+
+As we saw in the intro, we can easily demodulate any signal we lock onto.
+
+![SDR#](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/SDRSharp.PNG)
+
+Here we are on the FM radio spectrum which ranges from 87.5MHz to 108MHz, on our left we can choose how to demodulate the signal, in this case we will choose the WFM (Wide Frequency Modulation) in order to hear our everyday radio.
+
+Another project would be finding where our garage door is transmitting. Most of the garage door openers transmit on the 433 or 868 MHz band, se we look for strong signals in those frequencies, while we press the remote's button. And in 868.34MHz we find our signal. We will use this frequency later in order to try to reverse engineer this remote's algorithm.
+
+![SDR Remote](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/SDRREMOTE.PNG)
+
+We could also take a look into a **Frequency Hopping Spread Spectrum** (FHSS) signal, for that we will use my drone's signal which according to its instructions it emits around 868MHz. We focus SDR# around that frequency and we can easily spot the small bursts of electromagnetic force around that frequency with a very large bandwidth, around 20 MHz.
+
+![SDR FHSS](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/SDRFHSS.PNG)
+
+### [PAL/SECAM TV Plugin](https://www.rtl-sdr.com/new-sdr-plugin-pal-secam-tv/) 
+We can see any analog TV signals, although, in my country, Analog TV was switched off in 2010, so the closest we have to any PAL modulation transmitter is my FPV drone emitting at E5 channel, or 5885MHz, we can see how it easily demodulates the signal with the press of a button.
+
+![SDRPAL](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/SDRPAL.PNG)
+
+
+
+
 
 
