@@ -1,5 +1,5 @@
 # SDR_Hacking
-In this repository I will explain the various programs and scripts that I used to learnd and do different cool things with my HackRF one. I also include programs that have already been made and/or compiled and provide my own compilation and settings for Windows 10.
+In this repository I will explain the various programs and scripts that I used to learn and do different cool things with my HackRF one. I also include programs that have already been made and/or compiled and provide my own compilation and settings for Windows 10.
 
 So what is **SDR** or **Software-Defined Radio**, SDR is a radio communication system where components that have been traditionally implemented in hardware (e.g. mixers, filters, amplifiers, modulators/demodulators, etc.) are instead implemented by means of software on a personal computer.
 
@@ -15,7 +15,7 @@ Each SDR has different specifications, some of them are:
 
 ## **SDR Software**
 
-Once you have your SDR on your hands it's time to decide what to do with it. Do you just want to listen to FM radio with it? Do you want to listen to amateur ham radio? Do you want to see the electromagnetic spectrum produced by the different devices around your house? Do you want to receive live images from satellites? Do you want to hack every garage door? Do you want to spoof GPS signals? Do you want to see other people's screen by picking up their HDMI noise?
+Once you have your SDR on your hands it's time to decide what to do with it. Do you just want to listen to FM radio with it? Do you want to listen to amateur ham radio? Do you want to see the electromagnetic spectrum produced by the different devices around your house? Do you want to receive live images from satellites? Track nearby aircraft? Do you want to hack every garage door? Do you want to spoof GPS signals? Do you want to see other people's screen by picking up their HDMI noise?
 
 The possibilities are endless!, even though each application uses a different program, you will spend most of your time in only a couple of them. Let's go through some of my favourite programs and what each one of them does. Again I mostly use Windows 10, not very familiar with Linux, I will provide its Linux or macOS counterpart whenever I can.
 
@@ -28,7 +28,20 @@ The possibilities are endless!, even though each application uses a different pr
 
 - **[Universal Radio Hacker](https://github.com/jopohl/urh)**: An Open Source and easy to use signal analyzer. I learnt more using this program for a few hours than with several years of signal analysis in my university. With this program you can easily demodulate and see the info that is travelling through the air of whatever device you want to learn about, keyfobs, FM Radio Stations, weather stations... Although one thing is seeing the ones and zeroes travelling through the air and a very different thing is reverse engineering how that series of ones and zeroes was produced. Also available on Linux and macOS.
 
+    ![URH](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/URH.PNG)
+
 - **[GNU Radio](https://www.gnuradio.org/)**: The father of all the SDR applications. It is an Open Source development toolkit that provides signal processing blocks to implement software-defined radios and signal-processing systems. Requires a very good knowledge of all the modulation and demodulation techniques as well as general knowledge of flowgraph programming. There is a big number of premade modules. Available for all platforms.
 
 ## **SDR in the law**
+
+Now comes the boring part. Although generally, you can't output any electromagnetic signal outside of a few selected areas, which are the [ISM bands](https://en.wikipedia.org/wiki/ISM_band). These are the only ones where you could output some signals without running into trouble with the law or requiring any special license (Ham radio operator), as long as you respect the power that you can output in each band.
+
+What about listening? In most parts of the world it is illegal to listen to radio signals that aren't meant for the general public, like listening to police radio broadcasts. Even though, these signals are modulated with the TETRA protocol which is not encrypted and readily accessible, it is illegal to listen to them. 
+
+En lo que se refiere a la ley española, [Ley 32/2003, de 3 de noviembre, General de Telecomunicaciones.](https://www.boe.es/buscar/act.php?id=BOE-A-2003-20253), en el Articulo 53 de Infracciones muy graves, epígrafe n), considera *la interceptación, sin autorización, de telecomunicaciones no destinadas al público en general como una infraccion muy grave*, con hasta 21 millones de € de multa, esto quiere decir, es decir no está permitido la escucha a las Fuerzas y Cuerpos de Seguridad Nacional, así como la ingeniería inversa de diversos aparatos electrónicos. 
+
+En el mismo Artículo 53, su epigrafe e) establece: *La producción deliberada de interferencias definidas como perjudiciales* también se consdierará como una infracción muy grave, es decir, deberemos de ser muy cuidadosos a la hora de probar las distintas funciones de nuestro SDR, siempre emitiendo en las frecuencias de las bandas que tengamos permiso. Aunque por lo general la baja potencia de estos aparatos  menos de 25mW, dificilmente podrá provocar interferencia alguna con aparatos, a no ser que se disponga de amplificadores.
+
+Now that we are read
+
 
