@@ -21,6 +21,9 @@ The possibilities are endless!, even though each application uses a different pr
 
 - **[SDR#](https://airspy.com/download/)**: Free, but not Open Source, the most used SDR software in Windows, it is an easy and lightweight program that allows you to visualize the frequency spectrum and demodulate the signal you are looking at. Since it is so well known, lots and lots of [plugins](https://www.rtl-sdr.com/sdrsharp-plugins/) are available for it. You can demodulate PAL, NTSC, DSD, Tetra...
 
+    ![SDR#](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/SDRSharp.PNG)
+
+
     Its Linux and macOS counterpart is called [GQRX](https://gqrx.dk/), it is Open Source and easy  to use, although it doesn't have as many plugins as SDR#.
 
 - **[Universal Radio Hacker](https://github.com/jopohl/urh)**: An Open Source and easy to use signal analyzer. I learnt more using this program for a few hours than with several years of signal analysis in my university. With this program you can easily demodulate and see the info that is travelling through the air of whatever device you want to learn about, keyfobs, FM Radio Stations, weather stations... Although one thing is seeing the ones and zeroes travelling through the air and a very different thing is reverse engineering how that series of ones and zeroes was produced. Also available on Linux and macOS.
