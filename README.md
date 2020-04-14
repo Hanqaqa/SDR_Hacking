@@ -24,7 +24,7 @@ The possibilities are endless!, even though each application uses a different pr
     ![SDR#](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/SDRSharp.PNG)
 
 
-    Its Linux and macOS counterpart is called [GQRX](https://gqrx.dk/), it is Open Source and easy  to use, although it doesn't have as many plugins as SDR#.
+    Its Linux and macOS counterpart is called [GQRX](https://gqrx.dk/), it is Open Source and easy  to use, although it doesn't have as many plugins as SDR#. [SDR Angel](https://github.com/f4exb/sdrangel) is also a good Open Source choice that allows you to view as well as output some signals with the type of modulation you choose. A bit harder to use and not as well supported.
 
 - **[Universal Radio Hacker](https://github.com/jopohl/urh)**: An Open Source and easy to use signal analyzer. I learnt more using this program for a few hours than with several years of signal analysis in my university. With this program you can easily demodulate and see the info that is travelling through the air of whatever device you want to learn about, keyfobs, FM Radio Stations, weather stations... Although one thing is seeing the ones and zeroes travelling through the air and a very different thing is reverse engineering how that series of ones and zeroes was produced (Many protocolos are encrypted or use rolling codes). Also available on Linux and macOS.
 
@@ -93,9 +93,17 @@ We can see any analog TV signals, although, in my country, Analog TV was switche
 
 ## Universal Radio Hacker
 
+My favourite SDR application, allows you to easily demodulate devices. Let's start by seeing what a garage door's remote outputs while you press it. 
 
+I have this old remote that on its back it says something about 433MHz, so let's hit File > Spectrum Analyzer, choose our settings and hit start. We should see something like this when we press the remote's button:
 
+![URH1](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/URH1.PNG)
 
+Hit as close as you can on the peak of the Fast Fourier Transform (FFT) plot, and close that window. Now URH will remember that frequency for the next step: Recording that signal. Go to File > Record Signal. Check that you are still on the chosen frequency. Hit record and press the button. I have pressed it two times to check if something changes.
+
+![URH2](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/URH2.PNG)
+
+Here I present the two signals and a small portion of one on the signals on the bottom. You can see on the window which shows the HEX values, how the signal is the same after hitting the button two times. Which means, the garage's door always listens for that same 256 bits, which offers barely any security to record and play attacks!! :poop: :poop: :poop: :poop:
 
 ## [TEMPEST Attack](https://github.com/martinmarinov/TempestSDR)
 
@@ -119,3 +127,4 @@ In my case I got the best reception around 449MHz and selecting auto for the pos
 
 ![Tempest2](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/Tempest2.PNG)
 
+The results are quite impressive. You can clearly see the windows, the desktop and its icons. The range of this attack could be improved by using a directional 433MHz Yagi antenna, whose price is around 40€. Protecting towards this kind of attack is quite simple, yet inconvinient as it would require shielding with metal the whole room you are in, or shielding all the components, monitor, PC, cable... Which would result in overheating as no small holes for airflow can be left open.
