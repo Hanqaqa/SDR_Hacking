@@ -95,15 +95,25 @@ We can see any analog TV signals, although, in my country, Analog TV was switche
 
 My favourite SDR application, allows you to easily demodulate devices. Let's start by seeing what a garage door's remote outputs while you press it. 
 
-I have this old remote that on its back it says something about 433MHz, so let's hit File > Spectrum Analyzer, choose our settings and hit start. We should see something like this when we press the remote's button:
+### Old garage door remote
+
+I have this old remote that on its back it says something about 433MHz, so let's hit File > Spectrum Analyzer, choose our settings and desired frequency around 433MHz. And hit start. We should see something like this when we press the remote's button:
 
 ![URH1](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/URH1.PNG)
 
-Hit as close as you can on the peak of the Fast Fourier Transform (FFT) plot, and close that window. Now URH will remember that frequency for the next step: Recording that signal. Go to File > Record Signal. Check that you are still on the chosen frequency. Hit record and press the button. I have pressed it two times to check if something changes.
+Hit as close as you can on the peak of the Fast Fourier Transform (FFT) plot, that will be where our signal is located, and close that window. Now URH will remember that frequency for the next step: Recording that signal. Go to File > Record Signal. Check that you are still on the chosen frequency. Hit record and press the button. I have pressed it two times to check if something changes.
 
 ![URH2](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/URH2.PNG)
 
 Here I present the two signals and a small portion of one on the signals on the bottom. You can see on the window which shows the HEX values, how the signal is the same after hitting the button two times. Which means, the garage's door always listens for that same 256 bits, which offers barely any security to record and play attacks!! :poop: :poop: :poop: :poop:
+
+### New garage door remote
+
+Now let's try the same proccess with a newer garage door remote for a different house. This one doesn't say anything about where it's sending the signals, so we take a look at several possible frequencies and search for it, they usually are 433MHz, 868MHz and 1.2GHz. And bingo. Around 868 MHz we find it a peak. We repeat the same process of centering the frequency where it is outputting and record two button presses. This time, we get something a bit different:
+
+![URH3](https://github.com/Hanqaqa/SDR_Hacking/blob/master/media/URH3.PNG)
+
+The last half of the sent code changes every time we press the button, which means that, quite possibly, this remote is using a rolling code generator. Further analysis of the code could help reverse engineer the seed the remote is using.
 
 ## [TEMPEST Attack](https://github.com/martinmarinov/TempestSDR)
 
